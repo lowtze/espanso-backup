@@ -1,0 +1,479 @@
+# espanso match file
+
+# For a complete introduction, visit the official docs at: https://espanso.org/docs/
+
+# You can use this file to define the base matches (aka snippets)
+# that will be available in every application when using espanso.
+
+# Matches are substitution rules: when you type the "trigger" string
+# it gets replaced by the "replace" string.
+matches:
+  # Simple text replacement
+  - trigger: ":espanso"
+    replace: "Hi there!"
+
+  # NOTE: espanso uses YAML to define matches, so pay attention to the indentation!
+
+  # But matches can also be dynamic:
+
+  # Print the current date
+  - trigger: ":date"
+    replace: "{{mydate}}"
+    vars:
+      - name: mydate
+        type: date
+        params:
+          format: "%m/%d/%Y"
+
+  # Print the output of a shell command
+  - trigger: ":shell"
+    replace: "{{output}}"
+    vars:
+      - name: output
+        type: shell
+        params:
+          cmd: "echo 'Hello from your shell'"
+          
+  # And much more! For more information, visit the docs: https://espanso.org/docs/
+
+
+  #Insert clipboard and generate HTML link
+  - trigger: "-<a"
+    replace: "<a href=\"{{clipboard}}\" />$|$</a>"
+    vars:
+      - name: "clipboard"
+        type: "clipboard"
+
+  # Set up basic HTML template
+  - trigger: "-<htm"
+    replace: |
+        <!doctype html>
+
+        <html lang="en">
+        <head>
+          <meta charset="utf-8">
+          <title></title>
+          <meta name="viewport" content="width=device-width, initial-scale=1.0">
+          <meta name="author" content="Zach Low">
+          <link rel="stylesheet" href="styles.css">
+        </head>
+
+        <body>
+        $|$
+
+
+        </body>
+        </html>
+
+
+  # Ported from AutoHotkey
+  
+  
+  # Print the current date
+  # for time formats see: https://docs.rs/chrono/0.4.7/chrono/format/strftime/index.html
+  - trigger: "]d"
+    replace: "{{mydate}}"
+    word: true #this prevents it from triggering until a space, comma, or newline is inserted before and after
+    vars:
+      - name: mydate
+        type: date
+        params:
+          format: "%d-%b-%y"
+
+  # Print the current date in Obsidian format
+  # for time formats see: https://docs.rs/chrono/0.4.7/chrono/format/strftime/index.html
+  - trigger: "]od "
+    replace: "{{mydate}}"
+    vars:
+      - name: mydate
+        type: date
+        params:
+          format: "%Y-%m-%d" #could also use "%F"
+
+  # Print the current date in file format
+  # for time formats see: https://docs.rs/chrono/0.4.7/chrono/format/strftime/index.html
+  - trigger: "]fd "
+    replace: "{{mydate}}"
+    vars:
+      - name: mydate
+        type: date
+        params:
+          format: "%m-%d-%y" # using %- before the time supresses padding i.e. 9-6-22 instead of 09-06-22
+
+  # Print the current date with time
+  # for time formats see: https://docs.rs/chrono/0.4.7/chrono/format/strftime/index.html
+  - trigger: "]dd"
+    replace: "{{mydate}}"
+    word: true #this prevents it from triggering until a space, comma, or newline is inserted before and after
+    vars:
+      - name: mydate
+        type: date
+        params:
+          format: "%d %B %Y %H:%M"
+   
+   
+  # Lorem Paragraph
+  - trigger: "\\lorem"
+    replace: "{{output}}"
+    vars:
+      - name: output
+        type: random
+        params:
+          choices:
+            - "Lorem ipsum dolor sit amet, consectetur adipisici elit, sed eiusmod tempor incidunt ut labore et dolore magna aliqua. Donec sed odio operae, eu vulputate felis rhoncus. Salutantibus vitae elit libero, a pharetra augue. Nihil hic munitissimus habendi senatus locus, nihil horum? A communi observantia non est recedendum."
+            - "Curabitur blandit tempus ardua ridiculus sed magna. Sed haec quis possit intrepidus aestimare tellus. Quisque ut dolor gravida, placerat libero vel, euismod. Plura mihi bona sunt, inclinet, amari petere vellent."
+            - "Fictum, deserunt mollit anim laborum astutumque! Quisque placerat facilisis egestas cillum dolore. Nec dubitamus multa iter quae et nos invenerat. Contra legem facit qui id facit quod lex prohibet. Quam diu etiam furor iste tuus nos eludet?"
+            - "Plura mihi bona sunt, inclinet, amari petere vellent. Ab illo tempore, ab est sed immemorabili. Ullamco laboris nisi ut aliquid ex ea commodi consequat. Quae vero auctorem tractata ab fiducia dicuntur. At nos hinc posthac, sitientis piros Afros."
+            - "Lorem ipsum dolor sit amet, consectetur adipisici elit, sed eiusmod tempor incidunt ut labore et dolore magna aliqua. Me non paenitet nullum festiviorem excogitasse ad hoc. Ambitioni dedisse scripsisse iudicaretur. Unam incolunt Belgae, aliam Aquitani, tertiam. Morbi fringilla convallis sapien, id pulvinar odio volutpat. A communi observantia non est recedendum."
+            - "Quisque ut dolor gravida, placerat libero vel, euismod. Ambitioni dedisse scripsisse iudicaretur. Donec sed odio operae, eu vulputate felis rhoncus. Nihilne te nocturnum praesidium Palati, nihil urbis vigiliae."
+            - "Fabio vel iudice vincam, sunt in culpa qui officia. Inmensae subtilitatis, obscuris et malesuada fames. Ambitioni dedisse scripsisse iudicaretur. Nec dubitamus multa iter quae et nos invenerat. Petierunt uti sibi concilium totius Galliae in diem certam indicere."
+            - "A communi observantia non est recedendum. Vivamus sagittis lacus vel augue laoreet rutrum faucibus. Nihilne te nocturnum praesidium Palati, nihil urbis vigiliae."
+            - "Non equidem invideo, miror magis posuere velit aliquet. Quisque placerat facilisis egestas cillum dolore. Curabitur blandit tempus ardua ridiculus sed magna. Contra legem facit qui id facit quod lex prohibet. Petierunt uti sibi concilium totius Galliae in diem certam indicere."
+            - "Ab illo tempore, ab est sed immemorabili. Cum sociis natoque penatibus et magnis dis parturient. Quam diu etiam furor iste tuus nos eludet? Ut enim ad minim veniam, quis nostrud exercitation."
+            - "Nihilne te nocturnum praesidium Palati, nihil urbis vigiliae. Salutantibus vitae elit libero, a pharetra augue. Quam diu etiam furor iste tuus nos eludet? Fabio vel iudice vincam, sunt in culpa qui officia. Quam temere in vitiis, legem sancimus haerentia. Quisque ut dolor gravida, placerat libero vel, euismod."
+            - "Morbi fringilla convallis sapien, id pulvinar odio volutpat. Hi omnes lingua, institutis, legibus inter se differunt. Non equidem invideo, miror magis posuere velit aliquet. Quid securi etiam tamquam eu fugiat nulla pariatur. Inmensae subtilitatis, obscuris et malesuada fames. Fictum, deserunt mollit anim laborum astutumque!"
+            - "Cum sociis natoque penatibus et magnis dis parturient. Curabitur blandit tempus ardua ridiculus sed magna. Salutantibus vitae elit libero, a pharetra augue."
+            - "Petierunt uti sibi concilium totius Galliae in diem certam indicere. Morbi fringilla convallis sapien, id pulvinar odio volutpat. A communi observantia non est recedendum."
+            - "Phasellus laoreet lorem vel dolor tempus vehicula. Idque Caesaris facere voluntate liceret: sese habere. Ab illo tempore, ab est sed immemorabili. Mercedem aut nummos unde unde extricat, amaras. Praeterea iter est quasdam res quas ex communi."
+ 
+ 
+  # Multiples paragraphs of Lipsum
+  - trigger: \\5lorem"
+    replace: "{{one}}\n\n{{two}}\n\n{{three}}\n\n{{four}}\n\n{{five}}"
+    vars:
+      - name: one
+        type: match
+        params:
+          trigger: "#lorem"
+      - name: two
+        type: match
+        params:
+          trigger: "#lorem"
+      - name: three
+        type: match
+        params:
+          trigger: "#lorem"
+      - name: four
+        type: match
+        params:
+          trigger: "#lorem"
+      - name: five
+        type: match
+        params:
+          trigger: "#lorem"
+
+
+  # text replacers
+  - trigger: "resumee"
+    replace: "résumé"
+  
+  
+  # Course Abbreviations
+  - trigger: "\\ces" # need to escape the escape character for it to work
+    replace: "Creating an Effective School"
+    
+  - trigger: "\\ltd"
+    replace: "Leadership and Team Dynamics"
+    
+  - trigger: "\\is"
+    replace: "Instructional Supervision and Evaluation"
+
+  - trigger: "\\curl"
+    replace: "Curriculum Leadership"
+  
+  - trigger: "\\tech"
+    replace: "Technology Leadership"
+    
+  - trigger: "\\assess"
+    replace: "Assessment Leadership"
+    
+  - trigger: "\\iaml"
+    replace: "Instructing and Assessing Multilingual Learners"
+
+  - trigger: "\\dlmll"
+    replace: "Designing Learning for Multilingual Learners Through Linguistics"
+    
+  - trigger: "\\eal"
+    replace: "EAL in the Mainstream Classroom"
+    
+  - trigger: "\\is"
+    replace: "Instructional Supervision and Evaluation"
+
+  - trigger: "\\tools"
+    replace: "Leadership Tools"
+  
+  - trigger: "\\curdes"
+    replace: "Curriculum—the Heart of the Teacher Leader Role"
+    
+  - trigger: "\\coach"
+    replace: "Coaching and Supervising your Team"
+    
+  - trigger: "\\tassess"
+    replace: "Leading Learner Centered Assessment"
+    
+  - trigger: "\\solut"
+    replace: "Getting to Solutions: The Heart of Counseling  "
+
+  - trigger: "\\unico"
+    replace: "University Counseling in the International School"
+    
+  - trigger: "\\intro"
+    replace: "Essential Skills for International School Counselors"
+    
+  - trigger: "\\skills"
+    replace: "Essential Skills for International School Counselors"
+    
+  - trigger: "\\ment"
+    replace: "Mental Health and Well-being in International Schools"
+
+  - trigger: "\\cult"
+    replace: "Culturally Responsive Counseling in the International School"
+    
+  # Additional Work Abbreviations
+  - trigger: "\\sig "
+    replace: | # use the pipe character to post multiline item but keep spaces and line breaks
+      All the best,
+      
+      
+      Zach
+  
+  # New Latin Macrons
+  - trigger: "-a " # you can use space in the prompt!
+    replace: "ā"
+    propagate_case: true # this will replace with a capitalized version if the input is capitalized
+    
+  - trigger: "-e "
+    replace: "ē"
+    propagate_case: true
+    
+  - trigger: "-i "
+    replace: "ī"
+    propagate_case: true
+    
+  - trigger: "-o "
+    replace: "ō"
+    propagate_case: true
+    
+  - trigger: "-u "
+    replace: "ū"
+    propagate_case: true
+    
+  - trigger: "-y "
+    replace: "ȳ"
+    propagate_case: true
+
+    
+  # Additional Characters
+  - trigger: "-w "
+    replace: "æ"
+    propagate_case: true 
+
+  - trigger: "-th "
+    replace: "þ"
+    propagate_case: true 
+    
+  - trigger: "-d "
+    replace: "ð"
+    propagate_case: true 
+
+  - trigger: "-n "
+    replace: "ñ"
+    propagate_case: true 
+
+  - trigger: "\"u "
+    replace: "ü"
+    propagate_case: true 
+    
+  - trigger: "\"o "
+    replace: "ö"
+    propagate_case: true
+
+  - trigger: "-sz "
+    replace: "ß"
+    
+  - trigger: "--"
+    replace: "—"
+    
+  - trigger: "-$"
+    replace: "€"
+    
+  - trigger: "-?"
+    replace: "¿"
+    
+  - trigger: "-!"
+    replace: "¡"
+    
+  - trigger: "-:"
+    replace: "«"
+    
+  - trigger: "-\""
+    replace: "»"
+    
+  # Italian Characters
+  - trigger: "\\a " # you can use space in the prompt!
+    replace: "à"
+    propagate_case: true # this will replace with a capitalized version if the input is capitalized
+    
+  - trigger: "\\e "
+    replace: "è"
+    propagate_case: true
+    
+  - trigger: "\\i "
+    replace: "ì"
+    propagate_case: true
+    
+  - trigger: "\\o "
+    replace: "ò"
+    propagate_case: true
+    
+  - trigger: "\\u "
+    replace: "ù"
+    propagate_case: true
+
+  - trigger: "/a "
+    replace: "á"
+    propagate_case: true
+    
+  - trigger: "/e "
+    replace: "é"
+    propagate_case: true
+
+  - trigger: "/i "
+    replace: "í"
+    propagate_case: true
+
+  - trigger: "/o "
+    replace: "ó"
+    propagate_case: true
+    
+# Espanso Dice
+
+  - triggers: [".r2", ".r d2"]
+    word: true
+    replace: "d2: {{output}}"
+    vars:
+      - name: output
+        type: random
+        params:
+          choices:
+            - "1"
+            - "2"
+  - triggers: [".r3", ".r d3"]
+    word: true
+    replace: "d3: {{output}}"
+    vars:
+      - name: output
+        type: random
+        params:
+          choices:
+            - "1"
+            - "2"
+            - "3"
+  - triggers: [".r4", ".r d4"]
+    word: true
+    replace: "d4: {{output}}"
+    vars:
+      - name: output
+        type: random
+        params:
+          choices:
+            - "1"
+            - "2"
+            - "3"
+            - "4"
+  - triggers: [".r6", ".r d6"]
+    word: true
+    replace: "d6: {{output}}"
+    vars:
+      - name: output
+        type: random
+        params:
+          choices:
+            - "1"
+            - "2"
+            - "3"
+            - "4"
+            - "5"
+            - "6"
+  - triggers: [".r8", ".r d8"]
+    word: true
+    replace: "d8: {{output}}"
+    vars:
+      - name: output
+        type: random
+        params:
+          choices:
+            - "1"
+            - "2"
+            - "3"
+            - "4"
+            - "5"
+            - "6"
+            - "7"
+            - "8"
+  - triggers: [".r10", ".r d10"]
+    word: true
+    replace: "d10: {{output}}"
+    vars:
+      - name: output
+        type: random
+        params:
+          choices:
+            - "1"
+            - "2"
+            - "3"
+            - "4"
+            - "5"
+            - "6"
+            - "7"
+            - "8"
+            - "9"
+            - "10"
+  - triggers: [".r12", ".r d12"]
+    word: true
+    replace: "d12: {{output}}"
+    vars:
+      - name: output
+        type: random
+        params:
+          choices:
+            - "1"
+            - "2"
+            - "3"
+            - "4"
+            - "5"
+            - "6"
+            - "7"
+            - "8"
+            - "9"
+            - "10"
+            - "11"
+            - "12"
+  - triggers: [".r20", ".r d20"]
+    word: true
+    replace: "d20: {{output}}"
+    vars:
+      - name: output
+        type: random
+        params:
+          choices:
+            - "1"
+            - "2"
+            - "3"
+            - "4"
+            - "5"
+            - "6"
+            - "7"
+            - "8"
+            - "9"
+            - "10"
+            - "11"
+            - "12"
+            - "13"
+            - "14"
+            - "15"
+            - "16"
+            - "17"
+            - "18"
+            - "19"
+            - "20"
