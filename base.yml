@@ -261,7 +261,6 @@ matches:
   - trigger: "-y "
     replace: "ȳ"
     propagate_case: true
-
     
   # Additional Characters
   - trigger: "\\ae "
@@ -276,11 +275,11 @@ matches:
     replace: "ð"
     propagate_case: true 
 
-  - trigger: "\\n"
+  - trigger: "\\n "
     replace: "ñ"
     propagate_case: true 
 
-  - trigger: ":u"
+  - trigger: ":u "
     replace: "ü"
     propagate_case: true 
     
@@ -288,29 +287,29 @@ matches:
     replace: "ö"
     propagate_case: true
   
-  - trigger: "-oa"
+  - trigger: "-oa "
     replace: "å"
     propagate_case: true
   
-  - trigger: "-sz"
+  - trigger: "-sz "
     replace: "ß"
     
   - trigger: "-- "
     replace: "—"
     
-  - trigger: "-$"
+  - trigger: "-$ "
     replace: "€"
     
-  - trigger: "-?"
+  - trigger: "-? "
     replace: "¿"
     
-  - trigger: "-!"
+  - trigger: "-! "
     replace: "¡"
     
-  - trigger: "-:"
+  - trigger: "-: "
     replace: "«"
     
-  - trigger: "-\""
+  - trigger: "-\" "
     replace: "»"
     
   # Italian Characters
